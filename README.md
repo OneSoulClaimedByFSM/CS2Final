@@ -5,4 +5,7 @@ See [assignment9_part1.html](http://htmlpreview.github.io/?https://github.com/ca
 =======
 # CS2Final
 Final project for CS2
+
+PLAYERNAME=flying spaghetti monster
+
 >>>>>>> 01a5504ff8456857727ce24a1f1cae9d9ded507f

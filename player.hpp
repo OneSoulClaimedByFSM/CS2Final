@@ -8,11 +8,18 @@ using namespace std;
 
 class Player {
 
+protected:
+    Board *board;
+    Side side;
+
+
 public:
     Player(Side side);
     ~Player();
 
     Move *doMove(Move *opponentsMove, int msLeft);
+    Move *randomMove();
+    Side enemy();
 
     // Flag to tell if the player is running within the test_minimax context
     bool testingMinimax;
