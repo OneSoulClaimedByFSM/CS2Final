@@ -1,5 +1,7 @@
 #include "player.hpp"
 
+//aaaaaaaaaaayyyyyyyyyyy
+
 /*
  * Constructor for the player; initialize everything here. The side your AI is
  * on (BLACK or WHITE) is passed in as "side". The constructor must finish
@@ -47,3 +49,21 @@ Move *Player::doMove(Move *opponentsMove, int msLeft) {
      */
     return nullptr;
 }
+
+int Player::position_eval(Board board, Side side) {
+    //int value = 0;
+    /* TODO: wait for name of function
+     */
+    //std::vector<Move> p_moves;
+    
+    int black = board.countBlack();
+    int white = board.countWhite();
+    
+    if (side == BLACK) return black - white;
+    else return white - black;
+}
+
+Move *Player::Minimax(Board board, Side side)
+    
+    
+

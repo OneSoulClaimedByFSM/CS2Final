@@ -49,3 +49,22 @@ Move *Player::doMove(Move *opponentsMove, int msLeft) {
      */
     return nullptr;
 }
+
+int Player::position_eval(Side side) {
+    //int value = 0;
+    /* TODO: wait for name of function
+     */
+    //std::vector<Move> p_moves;
+    
+    int black = board.countBlack();
+    int white = board.countWhite();
+    
+    if (side == BLACK) return black - white;
+    else return white - black;
+}
+
+Move *Player::Minimax(Board board, Side side, int depth) {
+    
+    
+    
+
