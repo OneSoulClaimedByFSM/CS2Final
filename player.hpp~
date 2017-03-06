@@ -9,16 +9,12 @@ using namespace std;
 class Player {
 
 protected:
-    Board *board;
     Side side;
-<<<<<<< HEAD
-    //Move move(0,0);
-=======
-    //Move move;
->>>>>>> 93d1539cb6d0567e3dd5e42905aa5852378c457d
+    Move *move;
     int depth = 2;
 
 public:
+    Board *board;
     Player(Side side);
     ~Player();
 
@@ -26,7 +22,7 @@ public:
     Move *randomMove();
     Side enemy();
     
-    std::tuple<int, Move> Minimax(Board *board, Side side, int depth);
+    std::tuple<int, Move*> Minimax(Board *board, Side side, int depth);
     int position_eval();
 
     // Flag to tell if the player is running within the test_minimax context

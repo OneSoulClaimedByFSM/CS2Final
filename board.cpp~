@@ -1,9 +1,6 @@
 #include "board.hpp"
 #include <iostream>
-<<<<<<< HEAD
-=======
 
->>>>>>> 93d1539cb6d0567e3dd5e42905aa5852378c457d
 /*
  * Make a standard 8x8 othello board and initialize it to the standard setup.
  */
@@ -173,12 +170,7 @@ std::vector<Move*> Board::possibleMoves(Side side)
     {
         for (int j = 0; j < 8; j++)
         {
-<<<<<<< HEAD
-            move = new Move(i, j);
-            bool hello = checkMove(move, side);
-            //std::cerr << "(" << i << ", " << j << ")" << std::endl;
-            if (hello)
-=======
+
             Move *move = new Move(i, j);
             if (checkMove(move, side))
 >>>>>>> 93d1539cb6d0567e3dd5e42905aa5852378c457d

@@ -14,9 +14,14 @@ public:
     Move(int x, int y) {
         this->x = x;
         this->y = y; 
-        this->score = INT_MIN;       
+        //this->score = INT_MIN;       
     }
     ~Move() {}
+    
+    void operator = (const Move &move) {
+        this->x = move.x;
+        this->y = move.y;
+    }
 
     int getX() { return x; }
     int getY() { return y; }
