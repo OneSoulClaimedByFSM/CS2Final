@@ -42,11 +42,11 @@ Player::~Player() {
 Move *Player::doMove(Move *opponentsMove, int msLeft) 
 {
     this->board->doMove(opponentsMove, enemy());
-    while (msLeft == -1 || msLeft > 5)
-    {
-
-    }
-    return nullptr;
+    // do 
+    // {
+        
+    // } while (msLeft == -1 || elapsed < msLeft);
+    return randomMove();
 }
 
 int Player::position_eval() {
@@ -109,7 +109,10 @@ std::tuple<int, Move> *Player::Minimax(Board *board, Side side, int depth) {
  
 Move *Player::randomMove()
 {
-    if 
+    std::vector<Move*> moves = this->board->possibleMoves(this->side);
+    int random = rand() % moves.size();
+    std::cerr << random << std::endl;
+    return moves[random];
 }
 
 Side Player::enemy(){
