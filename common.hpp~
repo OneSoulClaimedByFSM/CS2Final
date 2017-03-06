@@ -14,7 +14,7 @@ public:
     Move(int x, int y) {
         this->x = x;
         this->y = y; 
-        //this->score = setScore();       
+        this->score = INT_MIN;       
     }
     ~Move() {}
 
@@ -27,7 +27,6 @@ public:
     void print() {
         std::cerr << "(" << this->x << ", " << this->y << ")" << std::endl;
     }
-    */
 };
 
 #endif

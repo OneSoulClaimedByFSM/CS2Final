@@ -1,6 +1,7 @@
 #include "player.hpp"
 #include <cstdlib>
 #include <climits>
+#include <tuple>
 
 /*
  * Constructor for the player; initialize everything here. The side your AI is
@@ -53,11 +54,9 @@ Move *Player::doMove(Move *opponentsMove, int msLeft)
     return move;
 }
 
-// int Player::position_eval() {
-//     //int value = 0;
-//     /* TODO: wait for name of function
-//      */
-//     //std::vector<Move> p_moves;
+
+/*
+int Player::position_eval() {
     
 //     int black = board->countBlack();
 //     int white = board->countWhite();
@@ -66,6 +65,7 @@ Move *Player::doMove(Move *opponentsMove, int msLeft)
 //     else return white - black;
 // }
 
+<<<<<<< HEAD
 // std::tuple<int, Move> *Player::Minimax(Board *board, Side side, int depth) {
 //     //std::tuple<Move, int> result;
 //     if (depth == 0) return std::tuple<Move, int> result(position_eval(side), this->move);
@@ -112,6 +112,55 @@ Move *Player::doMove(Move *opponentsMove, int msLeft)
 // }                    
  
 Move *Player::randomMove(std::vector<Move*> moves)
+=======
+std::tuple<int, Move> *Player::Minimax(Board *board, Side side, int depth) {
+    //std::tuple<Move, int> result;
+    if (depth == 0) return std::tuple<Move, int> result(position_eval(side), this->move);
+    if (depth == this->depth) {
+        this->move->x = 0;
+        this->move->y = 0;
+    }
+    std::vector<Move> p_moves = this->board->possibleMoves();
+    //std::vector<int> scores;
+    int bestValue;
+    else if (side == this->side) {
+        bestValue = INT_MIN;
+        for (int i = 0; i < p_moves.size(); i++) {
+            Board *copy = board->copy();
+            copy->doMove(&p_moves[i], side);
+            int score;
+            Move move;
+            std::tie(score, move) = Minimax(copy, this->enemy(), depth - 1);
+            if (score > bestValue) {
+                bestValue = score;
+                if (depth == this->depth)
+                    this->move = p_moves[i];
+            }
+        }
+        return std::tuple<Move, int> result(bestValue, this->move);
+    }
+    else {
+        bestValue = INT_MAX;
+        for (int i = 0; i < p_moves.size(); i++) {
+            Board *copy = board->copy();
+            copy->doMove(&p_moves[i], side);
+            int score;
+            Move move;
+            std::tie(score, move) = Minimax(copy, this->enemy(), depth - 1);
+            if (score < bestValue) {
+                bestValue = score;
+                if (depth == this->depth)
+                    this->move = p_moves[i];
+            }
+        }
+        return std::tuple<Move, int> result(bestValue, this->move);
+    }     
+}                    
+*/
+
+
+Move *Player::randomMove()
+>>>>>>> 21e1e27d11c5b93c09a9a417602360e7c2b1e0c0
 {
     if (moves.size() == 0)
         return nullptr;

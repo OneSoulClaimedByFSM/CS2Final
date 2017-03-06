@@ -11,7 +11,11 @@ class Player {
 protected:
     Board *board;
     Side side;
+<<<<<<< HEAD
+    //Move move(0,0);
+=======
     //Move move;
+>>>>>>> 93d1539cb6d0567e3dd5e42905aa5852378c457d
     int depth = 2;
 
 public:
@@ -19,8 +23,7 @@ public:
     ~Player();
 
     Move *doMove(Move *opponentsMove, int msLeft);
-    Move *randomMove(std::vector<Move*> moves);
-    Move *basicMove(std::vector<Move*> moves);
+    Move *randomMove();
     Side enemy();
     
     std::tuple<int, Move> Minimax(Board *board, Side side, int depth);
