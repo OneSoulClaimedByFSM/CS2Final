@@ -19,7 +19,8 @@ public:
     ~Player();
 
     Move *doMove(Move *opponentsMove, int msLeft);
-    Move *randomMove();
+    Move *randomMove(std::vector<Move*> moves);
+    Move *basicMove(std::vector<Move*> moves);
     Side enemy();
 
     // Flag to tell if the player is running within the test_minimax context

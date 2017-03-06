@@ -43,8 +43,9 @@ Player::~Player() {
 Move *Player::doMove(Move *opponentsMove, int msLeft) 
 {
     this->board->doMove(opponentsMove, enemy());
-    Move *move = randomMove();
-    this->board->doMove(move, side);
+    std::vector<Move*> moves = this->board->possibleMoves(this->side);
+    Move *move = basicMove(moves);
+    this->board->doMove(move, this->side);
     // do 
     // {
         
@@ -110,13 +111,57 @@ Move *Player::doMove(Move *opponentsMove, int msLeft)
          
 // }                    
  
-Move *Player::randomMove()
+Move *Player::randomMove(std::vector<Move*> moves)
 {
-    std::vector<Move*> moves = this->board->possibleMoves(this->side);
+    if (moves.size() == 0)
+        return nullptr;
     srand(time(NULL));
     int random = rand() % moves.size();
     std::cerr << random << std::endl;
     return moves[random];
+}
+
+Move *Player::basicMove(std::vector<Move*> moves)
+{
+    if (moves.size() == 0)
+        return nullptr;
+
+    Move *move = nullptr;
+    bool edgeT = false;
+
+    for (unsigned int i = 0; i < moves.size(); i++)
+    {
+        int x = moves[i]->getX();
+        int y = moves[i]->getY();
+
+        bool edgeX = (x == 0 || x == 7);
+        bool edgeY = (y == 0 || y == 7);
+
+        if (edgeX && edgeY)
+            return moves[i];
+
+        if ((edgeX && y >= 2 && y <= 5) || (edgeY && x >= 2 && x <= 5))
+        {
+            move = moves[i];
+            edgeT = true;
+        }
+        else if (!edgeT && !edgeX && !edgeY && !((x == 1 || x == 6) && (y ==1 || y == 6)))
+        {
+            move = moves[i];
+        }
+    }
+
+    if (move != nullptr)
+        return move;
+
+    for (unsigned int i = 0; i < moves.size(); i++)
+    {
+        int x = moves[i]->getX();
+        int y = moves[i]->getY();
+        if (!((x == 1 || x == 6) && (y ==1 || y == 6)))
+            return moves[i];
+    }
+    return moves[0];
 }
 
 Side Player::enemy(){

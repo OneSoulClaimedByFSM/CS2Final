@@ -13,7 +13,7 @@ public:
     Move(int x, int y) {
         this->x = x;
         this->y = y; 
-        this->score = INT_MIN;       
+        //this->score = setScore();       
     }
     ~Move() {}
 
