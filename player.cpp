@@ -13,7 +13,7 @@ Player::Player(Side color) {
     // Will be set to true in test_minimax.cpp.
     testingMinimax = false;
     this->side = color;
-
+    this->board = new Board();
     /*
      * TODO: Do any initialization you need to do here (setting up the board,
      * precalculating things, etc.) However, remember that you will only have
@@ -50,11 +50,8 @@ Move *Player::doMove(Move *opponentsMove, int msLeft)
     return randomMove();
 }
 
+/*
 int Player::position_eval() {
-    //int value = 0;
-    /* TODO: wait for name of function
-     */
-    //std::vector<Move> p_moves;
     
     int black = board->countBlack();
     int white = board->countWhite();
@@ -106,7 +103,7 @@ std::tuple<int, Move> *Player::Minimax(Board *board, Side side, int depth) {
         return std::tuple<Move, int> result(bestValue, this->move);
     }     
 }                    
-
+*/
 
 Move *Player::randomMove()
 {

@@ -1,4 +1,5 @@
-include <climits>
+#include <climits>
+#include <iostream>
 #ifndef __COMMON_H__
 #define __COMMON_H__
 
@@ -22,6 +23,10 @@ public:
 
     void setX(int x) { this->x = x; }
     void setY(int y) { this->y = y; }
+    /*
+    void print() {
+        std::cerr << "(" << this->x << ", " << this->y << ")" << std::endl;
+    }
 };
 
 #endif

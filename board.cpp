@@ -1,5 +1,5 @@
 #include "board.hpp"
-
+#include <iostream>
 /*
  * Make a standard 8x8 othello board and initialize it to the standard setup.
  */
@@ -172,10 +172,10 @@ std::vector<Move*> Board::possibleMoves(Side side)
         {
             move = new Move(i, j);
             bool hello = checkMove(move, side);
-            std::cerr << "(" << i << ", " << j << ")" << std::endl;
+            //std::cerr << "(" << i << ", " << j << ")" << std::endl;
             if (hello)
             {
-                std::cerr << "(" << i << ", " << j << ")" << std::endl;
+                //std::cerr << "(" << i << ", " << j << ")" << std::endl;
                 good.push_back(move);
             //else
                 //delete move;
