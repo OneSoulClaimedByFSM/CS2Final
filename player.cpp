@@ -65,7 +65,6 @@ int Player::position_eval() {
 //     else return white - black;
 // }
 
-<<<<<<< HEAD
 // std::tuple<int, Move> *Player::Minimax(Board *board, Side side, int depth) {
 //     //std::tuple<Move, int> result;
 //     if (depth == 0) return std::tuple<Move, int> result(position_eval(side), this->move);
@@ -112,7 +111,7 @@ int Player::position_eval() {
 // }                    
  
 Move *Player::randomMove(std::vector<Move*> moves)
-=======
+
 std::tuple<int, Move> *Player::Minimax(Board *board, Side side, int depth) {
     //std::tuple<Move, int> result;
     if (depth == 0) return std::tuple<Move, int> result(position_eval(side), this->move);

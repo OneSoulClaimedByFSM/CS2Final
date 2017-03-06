@@ -170,15 +170,8 @@ std::vector<Move*> Board::possibleMoves(Side side)
     {
         for (int j = 0; j < 8; j++)
         {
-<<<<<<< HEAD
-            move = new Move(i, j);
-            bool hello = checkMove(move, side);
-            //std::cerr << "(" << i << ", " << j << ")" << std::endl;
-            if (hello)
-=======
             Move *move = new Move(i, j);
             if (checkMove(move, side))
->>>>>>> 93d1539cb6d0567e3dd5e42905aa5852378c457d
             {
                 //std::cerr << "(" << i << ", " << j << ")" << std::endl;
                 good.push_back(move);
