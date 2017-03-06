@@ -11,7 +11,8 @@ class Player {
 protected:
     Board *board;
     Side side;
-
+    Move move;
+    int depth = 2;
 
 public:
     Player(Side side);
