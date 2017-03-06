@@ -19,7 +19,8 @@ public:
     ~Player();
 
     Move *doMove(Move *opponentsMove, int msLeft);
-    Move *randomMove();
+    Move *randomMove(std::vector<Move*> moves);
+    Move *basicMove(std::vector<Move*> moves);
     Side enemy();
     
     std::tuple<int, Move*> Minimax(Board *board, Side side, int depth);

@@ -14,13 +14,18 @@ public:
     Move(int x, int y) {
         this->x = x;
         this->y = y; 
+<<<<<<< HEAD
         //this->score = INT_MIN;       
+=======
+        //this->score = setScore();       
+>>>>>>> d872e7c2dfef52922b89c062bea369e907c4cf1f
     }
     ~Move() {}
     
     void operator = (const Move &move) {
         this->x = move.x;
         this->y = move.y;
+    }
 
     int getX() { return x; }
     int getY() { return y; }

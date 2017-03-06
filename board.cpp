@@ -170,7 +170,6 @@ std::vector<Move*> Board::possibleMoves(Side side)
     {
         for (int j = 0; j < 8; j++)
         {
-
             Move *move = new Move(i, j);
             if (checkMove(move, side))
             {
