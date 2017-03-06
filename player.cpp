@@ -14,6 +14,7 @@ Player::Player(Side color) {
     testingMinimax = false;
     this->side = color;
     this->board = new Board();
+
     /*
      * TODO: Do any initialization you need to do here (setting up the board,
      * precalculating things, etc.) However, remember that you will only have
@@ -43,22 +44,25 @@ Player::~Player() {
 Move *Player::doMove(Move *opponentsMove, int msLeft) 
 {
     this->board->doMove(opponentsMove, enemy());
+    Move *move = randomMove();
+    this->board->doMove(move, side);
     // do 
     // {
         
     // } while (msLeft == -1 || elapsed < msLeft);
-    return randomMove();
+    return move;
 }
+
 
 /*
 int Player::position_eval() {
     
-    int black = board->countBlack();
-    int white = board->countWhite();
+//     int black = board->countBlack();
+//     int white = board->countWhite();
     
-    if (this->side == BLACK) return black - white;
-    else return white - black;
-}
+//     if (this->side == BLACK) return black - white;
+//     else return white - black;
+// }
 
 std::tuple<int, Move> *Player::Minimax(Board *board, Side side, int depth) {
     //std::tuple<Move, int> result;
@@ -105,9 +109,11 @@ std::tuple<int, Move> *Player::Minimax(Board *board, Side side, int depth) {
 }                    
 */
 
+
 Move *Player::randomMove()
 {
     std::vector<Move*> moves = this->board->possibleMoves(this->side);
+    srand(time(NULL));
     int random = rand() % moves.size();
     std::cerr << random << std::endl;
     return moves[random];

@@ -11,7 +11,7 @@ class Player {
 protected:
     Board *board;
     Side side;
-    //Move move(0,0);
+    //Move move;
     int depth = 2;
 
 public:
