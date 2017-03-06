@@ -1,6 +1,7 @@
 #include "player.hpp"
 #include <cstdlib>
 #include <climits>
+#include <tuple>
 
 /*
  * Constructor for the player; initialize everything here. The side your AI is
@@ -103,10 +104,10 @@ std::tuple<int, Move> *Player::Minimax(Board *board, Side side, int depth) {
             }
         }
         return std::tuple<Move, int> result(bestValue, this->move);
-    }
-         
+    }     
 }                    
- 
+
+
 Move *Player::randomMove()
 {
     if 

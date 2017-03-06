@@ -103,15 +103,15 @@ std::tuple<int, Move> *Player::Minimax(Board *board, Side side, int depth) {
             }
         }
         return std::tuple<Move, int> result(bestValue, this->move);
-    }
-         
+    }     
 }                    
- 
+
+/* 
 Move *Player::randomMove()
 {
     if 
 }
-
+*/
 Side Player::enemy(){
     if (this->side == WHITE)
         return BLACK;

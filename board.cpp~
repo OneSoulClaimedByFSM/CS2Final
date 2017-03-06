@@ -173,8 +173,8 @@ std::vector<Move*> Board::possibleMoves(Side side)
             move = new Move(i, j);
             if (checkMove(move, side))
                 good.push_back(move);
-            //else
-                //delete move;
+            else
+                delete move;
         }
     }
     return good;
