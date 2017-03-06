@@ -159,8 +159,7 @@ std::tuple<int, Move> *Player::Minimax(Board *board, Side side, int depth) {
 */
 
 
-Move *Player::randomMove()
->>>>>>> 21e1e27d11c5b93c09a9a417602360e7c2b1e0c0
+Move *Player::randomMove(std::vector<Move*> moves)
 {
     if (moves.size() == 0)
         return nullptr;
