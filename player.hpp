@@ -24,7 +24,7 @@ public:
     Side enemy();
     
     std::tuple<int, Move*> Minimax(Board *board, Side side, int depth);
-    int position_eval();
+    int position_eval(Board *board);
 
     // Flag to tell if the player is running within the test_minimax context
     bool testingMinimax;

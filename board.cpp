@@ -163,6 +163,42 @@ int Board::countWhite() {
     return taken.count() - black.count();
 }
 
+int Board::Black_eval() {
+    int value = 0;
+    
+    for (int i = 0; i < 8; i++)
+    {
+        for (int j = 0; j < 8; j++)
+        {
+            Move *move = new Move(i, j);
+            if (checkMove(move, BLACK))
+            { 
+                value += move->score;
+            }
+            delete move;
+        }
+    }
+    return value;
+}
+
+int Board::White_eval() {
+    int value = 0;
+    
+    for (int i = 0; i < 8; i++)
+    {
+        for (int j = 0; j < 8; j++)
+        {
+            Move *move = new Move(i, j);
+            if (checkMove(move, WHITE))
+            { 
+                value += move->score;
+            }
+            delete move;
+        }
+    }
+    return value;
+}
+
 std::vector<Move*> Board::possibleMoves(Side side)
 {
     std::vector<Move*> good;

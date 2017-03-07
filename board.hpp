@@ -30,6 +30,8 @@ public:
     int countBlack();
     int countWhite();
     std::vector<Move*> possibleMoves(Side side);
+    int Black_eval();
+    int White_eval();
 
     void setBoard(char data[]);
 };

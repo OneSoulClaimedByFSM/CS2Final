@@ -19,7 +19,7 @@ public:
     ~Player();
 
     Move *doMove(Move *opponentsMove, int msLeft);
-    Move *randomMove(std::vector<Move*> moves);
+    Move *randomMove();
     Move *basicMove(std::vector<Move*> moves);
     Side enemy();
     

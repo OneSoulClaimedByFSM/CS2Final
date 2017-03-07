@@ -14,7 +14,7 @@ public:
     Move(int x, int y) {
         this->x = x;
         this->y = y; 
-        //this->score = setScore();       
+        setScore();      
 
     }
     ~Move() {}
@@ -29,11 +29,33 @@ public:
 
     void setX(int x) { this->x = x; }
     void setY(int y) { this->y = y; }
-    /*
+    void setScore() {
+        bool edgeX = (x == 0 || x == 7);
+        bool edgeY = (y == 0 || y == 7);
+        bool edgeT = false;
+        if (edgeX && edgeY)
+            this->score = 10;
+
+        if ((edgeX && y >= 2 && y <= 5) || (edgeY && x >= 2 && x <= 5))
+        {
+            this->score = 5;
+            edgeT = true;
+        }
+        else if (!edgeT && !edgeX && !edgeY && !((x == 1 || x == 6) && (y ==1 || y == 6)))
+        {
+            this->score = 1;
+        }
+        
+        else if ((x == 1 || x == 6) && (y ==1 || y == 6))
+            this->score = -5;
+        else if ((edgeX && (y == 1 || y == 6)) || (edgeY && (x == 1 || x == 6)))
+            this->score = -2;
+    }
+    
     void print() {
         std::cerr << "(" << this->x << ", " << this->y << ")" << std::endl;
     }
-    */
+    
 };
 
 #endif
