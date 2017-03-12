@@ -47,9 +47,9 @@ public:
         }
         
         else if ((x == 1 || x == 6) && (y ==1 || y == 6))
-            this->score = -5;
+            this->score = 1;
         else if ((edgeX && (y == 1 || y == 6)) || (edgeY && (x == 1 || x == 6)))
-            this->score = -2;
+            this->score = 1;
     }
     
     void print() {

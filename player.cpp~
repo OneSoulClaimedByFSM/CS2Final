@@ -69,8 +69,8 @@ int Player::position_eval(Board *board) {
      //int black = board->countBlack();
      //int white = board->countWhite();
      
-     //int black = board->Black_eval();
-     //int white = board->White_eval();
+     int black = board->Black_eval();
+     int white = board->White_eval();
     
      if (this->side == BLACK) return black - white;
      else return white - black;
@@ -89,6 +89,11 @@ std::tuple<int, Move*> Player::Minimax(Board *board, Side side, int depth) {
     if (depth == this->depth) {
         this->move->x = 0;
         this->move->y = 0;
+        this->alpha[0] = INT_MIN;
+        this->alpha[1] = this->depth;
+        this->beta[0] = INT_MAX;
+        this->beta[1] = this->depth;
+        
     }
     std::vector<Move*> p_moves = board->possibleMoves(side);
     
@@ -115,6 +120,13 @@ std::tuple<int, Move*> Player::Minimax(Board *board, Side side, int depth) {
                 if (depth == this->depth)
                     this->move = p_moves[i];
             }
+            
+            //alpha-beta pruning
+            if (bestValue >= this->beta[0] && this->beta[1] - depth == 1 && this->depth - depth > 0)
+                break;
+            this->alpha[0] = bestValue;
+            this->alpha[1] = depth;
+                
         }
         std::get<0> (result) = bestValue;
         std::get<1> (result) = this->move;
@@ -139,6 +151,12 @@ std::tuple<int, Move*> Player::Minimax(Board *board, Side side, int depth) {
                 if (depth == this->depth)
                     this->move = p_moves[i];
             }
+            //alpha-beta pruning
+            if (bestValue <= this->alpha[0] && this->alpha[1] - depth == 1 && this->depth - depth > 0)
+                break;
+            this->beta[0] = bestValue;
+            this->beta[1] = depth;
+            
         }
         std::get<0> (result) = bestValue;
         std::get<1> (result) = this->move;

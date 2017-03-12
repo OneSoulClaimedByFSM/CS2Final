@@ -12,7 +12,9 @@ protected:
     Side side;
     Move *move;
     int depth = 2;
-
+    int alpha[2] = {0,0};
+    int beta[2] = {0,0};
+    
 public:
     Board *board;
     Player(Side side);
