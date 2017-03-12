@@ -11,7 +11,7 @@ class Player {
 protected:
     Side side;
     Move *move;
-    int depth = 2;
+    int depth = 4;
     int alpha[2] = {0,0};
     int beta[2] = {0,0};
     

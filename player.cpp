@@ -49,7 +49,7 @@ Move *Player::doMove(Move *opponentsMove, int msLeft)
     int score;
     
     Move *move;
-    std::tie(score, move) = Minimax(this->board, this->side, 2);
+    std::tie(score, move) = Minimax(this->board, this->side, 4);
     this->board->doMove(move, this->side);
     /*
     std::vector<Move*> moves = this->board->possibleMoves(this->side);
