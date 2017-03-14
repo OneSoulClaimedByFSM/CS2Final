@@ -11,6 +11,14 @@ class Board {
 private:
     bitset<64> black;
     bitset<64> taken;
+    int score[8][8] = { {100, -8, 8, 6, 6, 8, -8, 100},
+                        {-8, -24, -4, 1, 1, -4, -24, -8},
+                        {8, -4, 7, 4, 4, 7, -4, 8},
+                        {6, 1, 4, 0, 0, 4, 1, 6},
+                        {6, 1, 4, 0, 0, 4, 1, 6},
+                        {8, -4, 7, 4, 4, 7, -4, 8},
+                        {-8, -24, -4, 1, 1, -4, -24, -8},
+                        {100, -8, 8, 6, 6, 8, -8, 100} };
 
     bool occupied(int x, int y);
     bool get(Side side, int x, int y);
@@ -30,8 +38,9 @@ public:
     int countBlack();
     int countWhite();
     std::vector<Move*> possibleMoves(Side side);
-    int Black_eval();
-    int White_eval();
+    int mobility(Side side);
+    int state(Side side);
+    int frontier(Side side);
 
     void setBoard(char data[]);
 };

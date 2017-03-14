@@ -11,6 +11,15 @@ Board::Board() {
     taken.set(4 + 8 * 4);
     black.set(4 + 8 * 3);
     black.set(3 + 8 * 4);
+
+    // score[0] = {50, -8, 8, 6, 6, 8, -8, 50};
+    // score[1] = {-8, -24, -4, -3, -3, -4, -24, -8};
+    // score[2] = {8, -4, 7, 4, 4, 7, -4, 8};
+    // score[3] = {6, -3, 4, 0, 0, 4, -3, 6};
+    // score[4] = {6, -3, 4, 0, 0, 4, -3, 6};
+    // score[5] = {8, -4, 7, 4, 4, 7, -4, 8};
+    // score[6] = {-8, -24, -4, -3, -3, -4, -24, -8};
+    // score[7] = {50, -8, 8, 6, 6, 8, -8, 50};
 }
 
 /*
@@ -163,42 +172,6 @@ int Board::countWhite() {
     return taken.count() - black.count();
 }
 
-int Board::Black_eval() {
-    int value = 0;
-    
-    for (int i = 0; i < 8; i++)
-    {
-        for (int j = 0; j < 8; j++)
-        {
-            Move *move = new Move(i, j);
-            if (checkMove(move, BLACK))
-            { 
-                value += move->score;
-            }
-            delete move;
-        }
-    }
-    return value;
-}
-
-int Board::White_eval() {
-    int value = 0;
-    
-    for (int i = 0; i < 8; i++)
-    {
-        for (int j = 0; j < 8; j++)
-        {
-            Move *move = new Move(i, j);
-            if (checkMove(move, WHITE))
-            { 
-                value += move->score;
-            }
-            delete move;
-        }
-    }
-    return value;
-}
-
 std::vector<Move*> Board::possibleMoves(Side side)
 {
     std::vector<Move*> good;
@@ -222,6 +195,71 @@ std::vector<Move*> Board::possibleMoves(Side side)
     return good;
 }
 
+int Board::frontier(Side side)
+{
+    int num = 0;
+    for (int i = 0; i < 8; i++)
+    {
+        for (int j = 0; j < 8; j++)
+        {
+            if (get(side, i, j))
+            {
+                for (int k = -1; i <= 1; i++)
+                {
+                    for (int l = -1; j <= 1; j++)
+                    {   
+                        bool inside = i+k >= 0 && i+k < 8 && j+k >=0 && j+k < 8;
+                        if (inside && !(occupied(i+k, j+l)))
+                            num += 1;
+                    }
+                }
+            }
+        }
+    }
+    return num;
+}
+
+
+
+int Board::mobility(Side side)
+{
+    int num = 0;
+    for (int i = 0; i < 8; i++)
+    {
+        for (int j = 0; j < 8; j++)
+        {
+            Move *move = new Move(i, j);
+            if (checkMove(move, side))
+            {
+                num += 1;
+            }
+            delete move;
+        }
+    }
+    return num;
+}
+
+int Board::state(Side side)
+{
+    int num = 0;
+    for (int i = 0; i < 8; i++)
+    {
+        for (int j = 0; j < 8; j++)
+        {
+            if (get(side, i, j))
+            {
+                num += score[i][j];
+            }
+            else if(occupied(i, j))
+            {
+                num -= score[i][j];
+            }
+        }
+    }
+    return num;
+}
+
+
 /*
  * Sets the board state given an 8x8 char array where 'w' indicates a white
  * piece and 'b' indicates a black piece. Mainly for testing purposes.
@@ -238,3 +276,4 @@ void Board::setBoard(char data[]) {
         }
     }
 }
+

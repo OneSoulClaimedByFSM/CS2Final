@@ -25,8 +25,10 @@ public:
     Move *basicMove(std::vector<Move*> moves);
     Side enemy();
     
-    std::tuple<int, Move*> Minimax(Board *board, Side side, int depth);
-    int position_eval(Board *board);
+    std::tuple<double, Move*> Minimax(Board *board, Side side, int depth);
+    double evaluate(double mine, double enem);
+    double position_eval(Board *board);
+    double endgame_eval(Board *board);
 
     // Flag to tell if the player is running within the test_minimax context
     bool testingMinimax;
