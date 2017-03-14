@@ -82,15 +82,15 @@ double Player::position_eval(Board *board) {
     
     double mine = board->frontier(this->side);
     double enem = board->frontier(enemy());
-    std::cerr << "LOOKEE HERE: " << mine << ", " << enem;
+    //std::cerr << "LOOKEE HERE: " << mine << ", " << enem;
     double front = evaluate(mine, enem);
-    std::cerr << " ---> " << front << std::endl;
+    //std::cerr << " ---> " << front << std::endl;
 
     mine = board->mobility(this->side);
     enem = board->mobility(enemy());
-    std::cerr << "LOOKEE HERE: " << mine << ", " << enem;
+    //std::cerr << "LOOKEE HERE: " << mine << ", " << enem;
     double mobil = evaluate(mine, enem);
-        std::cerr << " ---> " << mobil << std::endl;
+        //std::cerr << " ---> " << mobil << std::endl;
 
     return (state) + (10 * mobil) - (8 * front);
 }
@@ -105,18 +105,18 @@ double Player::endgame_eval(Board *board) {
 
 std::tuple<double, Move*> Player::Minimax(Board *board, Side side, int depth) {
     std::tuple<double, Move*> result;
-    std::cerr << depth << std::endl;
+    //std::cerr << depth << std::endl;
     if (board->isDone()) {
         std::get<0> (result) = endgame_eval(board);
         std::get<1> (result) = this->move;
-        std::cerr << "endgame calc score " << std::get<0> (result) << std::endl;
+        //std::cerr << "endgame calc score " << std::get<0> (result) << std::endl;
         return result;
     }
 
     if (depth == 0) {
         std::get<0> (result) = position_eval(board);
         std::get<1> (result) = this->move;
-        std::cerr << "score " << std::get<0> (result) << std::endl;
+        //std::cerr << "score " << std::get<0> (result) << std::endl;
         return result;
     }
     
@@ -142,8 +142,8 @@ std::tuple<double, Move*> Player::Minimax(Board *board, Side side, int depth) {
     if (side == this->side) {
         bestValue = INT_MIN;
         for (int i = 0; i < p_moves.size(); i++) {
-            std::cerr << depth << " considering ";
-            p_moves[i]->print();
+            //std::cerr << depth << " considering ";
+            //p_moves[i]->print();
             Board *copy = board->copy();
             copy->doMove(p_moves[i], side);
             double score;
@@ -165,16 +165,16 @@ std::tuple<double, Move*> Player::Minimax(Board *board, Side side, int depth) {
         std::get<0> (result) = bestValue;
         std::get<1> (result) = this->move;
         if (depth == this->depth) {
-            this->move->print();
-            std::cerr << depth << " score " << bestValue << std::endl;
+            //this->move->print();
+            //std::cerr << depth << " score " << bestValue << std::endl;
         }
         return result;
     }
     else {
         bestValue = INT_MAX;
         for (double i = 0; i < p_moves.size(); i++) {
-            std::cerr << depth << " considering ";
-            p_moves[i]->print();
+            //std::cerr << depth << " considering ";
+            //p_moves[i]->print();
             Board *copy = board->copy();
             copy->doMove(p_moves[i], side);
             double score;
@@ -194,8 +194,8 @@ std::tuple<double, Move*> Player::Minimax(Board *board, Side side, int depth) {
         }
         std::get<0> (result) = bestValue;
         std::get<1> (result) = this->move;
-        this->move->print();
-        std::cerr << depth << " score " << bestValue << std::endl;
+        //this->move->print();
+        //std::cerr << depth << " score " << bestValue << std::endl;
         return result;
     }     
 }                    
