@@ -49,7 +49,7 @@ Move *Player::doMove(Move *opponentsMove, int msLeft)
     int score;
     
     Move *move;
-    std::tie(score, move) = Minimax(this->board, this->side, 2);
+    std::tie(score, move) = Minimax(this->board, this->side, 3);
     this->board->doMove(move, this->side);
     /*
     std::vector<Move*> moves = this->board->possibleMoves(this->side);
@@ -63,26 +63,60 @@ Move *Player::doMove(Move *opponentsMove, int msLeft)
     return move;
 }
 
+double Player::evaluate(double mine, double enem) {
 
-int Player::position_eval(Board *board) {
-    
-     //int black = board->countBlack();
-     //int white = board->countWhite();
-     
-     int black = board->Black_eval();
-     int white = board->White_eval();
-    
-     if (this->side == BLACK) return black - white;
-     else return white - black;
+    if (mine > enem)
+        return (100 * mine)/(mine + enem);
+    else if (mine < enem)
+        return -(100 * enem)/(mine + enem);
+    return 0;
 }
 
-std::tuple<int, Move*> Player::Minimax(Board *board, Side side, int depth) {
-    std::tuple<int, Move*> result;
-    //std::cerr << depth << std::endl;
+double Player::position_eval(Board *board) {
+     
+    // double mine = board->state(this->side);
+    // double enem = board->state(enemy());
+    // std::cerr << "LOOKEE HERE: " << mine << ", " << enem;
+    double state = board->state(this->side);
+    // std::cerr << " ---> " << state << std::endl;
+    
+    double mine = board->frontier(this->side);
+    double enem = board->frontier(enemy());
+    std::cerr << "LOOKEE HERE: " << mine << ", " << enem;
+    double front = evaluate(mine, enem);
+    std::cerr << " ---> " << front << std::endl;
+
+    mine = board->mobility(this->side);
+    enem = board->mobility(enemy());
+    std::cerr << "LOOKEE HERE: " << mine << ", " << enem;
+    double mobil = evaluate(mine, enem);
+        std::cerr << " ---> " << mobil << std::endl;
+
+    return (state) + (10 * mobil) - (8 * front);
+}
+
+double Player::endgame_eval(Board *board) {
+
+    int black = board->countBlack();
+    int white = board->countWhite();
+    if (this->side == BLACK) return 100 * (black - white);
+    else return 100 * (white - black);
+}
+
+std::tuple<double, Move*> Player::Minimax(Board *board, Side side, int depth) {
+    std::tuple<double, Move*> result;
+    std::cerr << depth << std::endl;
+    if (board->isDone()) {
+        std::get<0> (result) = endgame_eval(board);
+        std::get<1> (result) = this->move;
+        std::cerr << "endgame calc score " << std::get<0> (result) << std::endl;
+        return result;
+    }
+
     if (depth == 0) {
         std::get<0> (result) = position_eval(board);
         std::get<1> (result) = this->move;
-        std::cerr << "score " << position_eval(board) << std::endl;
+        std::cerr << "score " << std::get<0> (result) << std::endl;
         return result;
     }
     
@@ -104,7 +138,7 @@ std::tuple<int, Move*> Player::Minimax(Board *board, Side side, int depth) {
     }
     
     //std::vector<int> scores;
-    int bestValue;
+    double bestValue;
     if (side == this->side) {
         bestValue = INT_MIN;
         for (int i = 0; i < p_moves.size(); i++) {
@@ -112,7 +146,7 @@ std::tuple<int, Move*> Player::Minimax(Board *board, Side side, int depth) {
             p_moves[i]->print();
             Board *copy = board->copy();
             copy->doMove(p_moves[i], side);
-            int score;
+            double score;
             Move *move;
             std::tie(score, move) = Minimax(copy, this->enemy(), depth - 1);
             if (score > bestValue) {
@@ -138,12 +172,12 @@ std::tuple<int, Move*> Player::Minimax(Board *board, Side side, int depth) {
     }
     else {
         bestValue = INT_MAX;
-        for (int i = 0; i < p_moves.size(); i++) {
+        for (double i = 0; i < p_moves.size(); i++) {
             std::cerr << depth << " considering ";
             p_moves[i]->print();
             Board *copy = board->copy();
             copy->doMove(p_moves[i], side);
-            int score;
+            double score;
             Move *move;
             std::tie(score, move) = Minimax(copy, this->enemy(), depth - 1);
             if (score < bestValue) {
