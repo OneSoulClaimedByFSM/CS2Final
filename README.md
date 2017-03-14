@@ -12,15 +12,15 @@ PLAYERNAME=flying spaghetti monster
 
 -------------------------RESPONSIBILITIES--------------------------
 
-Emily Pan as EMILY PAN:
+EMILY PAN:
 
 I was responsible for heuristic functions and the first portion of
 Part 1 (i.e. the not minimax part).
 
-Emily Pan as LILY ZHANG:
+HANWEN ZHANG:
 
 I wrote the minimax function and updated it to utilize alpha-beta
-pruning.  I also helped debug when Emily started faceplanting on the
+pruning. I also helped debug when Emily started faceplanting on the
 floor.
 
 -------------------------------LOG---------------------------------
@@ -44,5 +44,5 @@ Frontier:        summing of all empty adjacent spaces of our pieces, divided
 If the game has ended, the score becomes the difference in the number of coins
 between each side.
 
-We used alpha-beta pruning in a minimax function that recursively evaluates
-the board to a depth of 4.
+Algorithm wise, we recursively explores the decision tree to a depth of four. We
+choose moves using the minimax algorithm enhanced with alpha-beta pruning.
