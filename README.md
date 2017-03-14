@@ -20,7 +20,8 @@ Part 1 (i.e. the not minimax part).
 HANWEN ZHANG:
 
 I wrote the minimax function and updated it to utilize alpha-beta
-pruning. I also helped debug when Emily started faceplanting on the
+pruning. Also wrote the evaluating difference in the number of pieces function.
+I also helped debug when Emily started faceplanting on the
 floor.
 
 -------------------------------LOG---------------------------------
